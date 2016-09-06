@@ -30,7 +30,7 @@ class Data extends MY_Controller
         $crud->field_type('created_at', 'hidden', date('Y-m-d H:i:s'));
         $crud->field_type('user_id', 'hidden', 1);
         $crud->field_type('most_visited', 'hidden');
-        $crud->columns('post_name','post_slug','post_description','post_status');
+        $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
         $crud->set_relation('category_id','dggsjm_categories','category_name');
         $crud->callback_field('post_tags', 'Crud_helper::add_tags');
         $crud->display_as('category_id','Category');

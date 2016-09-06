@@ -3,137 +3,76 @@
 <div class="sp-40"></div>
 
 <div class="brown-rule"></div>
-
-<div class="container">
-
-	<div class="footer">
-
-		<div class="row">
-
-			<div class="col-md-2">
-
-			<div class="footer-widget">
-
-					<div class="title">DONATE</div>
-
-					<a href=""><div class="links">Paypal</div></a>
-
-						<a href=""><div class="links">Wire Transfer</div></a>
-
-						<a href=""><div class="links">Cheque/Draft</div></a>
-
+<div class="bg-black">
+	<div class="container">
+		<div class="footer">
+			<div class="row">
+				<div class="col-md-2">
+				<div class="footer-widget">
+						<div class="title">DONATE</div>
+  							<a href=""><div class="links">Paypal</div></a>
+							<a href=""><div class="links">Wire Transfer</div></a>
+							<a href=""><div class="links">Cheque/Draft</div></a>
+					</div>
 				</div>
-
-			</div>
-			<div class="col-md-2">
+				<div class="col-md-2">
+						<div class="footer-widget">
+						<div class="title">SOCIAL</div>
+							<a href="http://www.facebook.com/iowiki/" target="_BLANK"><div class="links">Facebook</div></a>
+							<a href="" target="_BLANK"><div class="links">Twitter</div></a>
+							<a href="https://www.youtube.com/channel/UC4HgMfW9s_AdADMMeGDmAcg" target="_BLANK"><div class="links">Youtube</div></a>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="footer-widget language-widget">
+						<div class="title">LANGUAGE</div>
+							<div id="google_translate_element"></div>
+							<ul class="translation-links">
+							  <li><a href="#" class="english" data-lang="English">English</a></li>
+							  <li><a href="#" class="spanish" data-lang="Spanish">Español</a></li>
+	                          <li><a href="#" class="german" data-lang="German">Deutsche</a></li>
+	                          <li><a href="#" class="japanese" data-lang="Japanese">日本語</a></li>
+	                          <li><a href="#" class="french" data-lang="French">français</a></li>
+	                          <li><a href="#" class="chinese" data-lang="Chinese">中文</a></li>
+							</ul>
+	<!-- Code provided by Google -->
+					</div>
+				</div>
+				<div class="col-md-2">
 					<div class="footer-widget">
-
-					<div class="title">SOCIAL</div>
-
-						<a href="http://www.facebook.com/iowiki/" target="_BLANK"><div class="links">Facebook</div></a>
-
-						<a href="" target="_BLANK"><div class="links">Twitter</div></a>
-
-						<a href="https://www.youtube.com/channel/UC4HgMfW9s_AdADMMeGDmAcg" target="_BLANK"><div class="links">Youtube</div></a>
-
+						<div class="title">PAGES</div>
+	                    <ul>
+							  <?php foreach(get_pages_list() as $key => $value): ?>        
+	                                <li>
+	                                    <a href="<?=site_url('pages/'.$value['page_slug'].'/'.$value['id'])?>">
+	                                        <?=$value['page_name']?>
+	                                    </a>
+	                                </li>
+	                            <?php endforeach; ?> 
+	                    </ul>   
+					</div>
 				</div>
-			</div>
-
-			<div class="col-md-2">
-
-				<div class="footer-widget language-widget">
-
-					<div class="title">LANGUAGE</div>
-
-						<div id="google_translate_element"></div>
-
-						<ul class="translation-links">
-
-						  <li><a href="#" class="english" data-lang="English">English</a></li>
-
-						  <li><a href="#" class="spanish" data-lang="Spanish">Español</a></li>
-
-                          <li><a href="#" class="german" data-lang="German">Deutsche</a></li>
-
-                          <li><a href="#" class="japanese" data-lang="Japanese">日本語</a></li>
-						  
-                          <li><a href="#" class="french" data-lang="French">français</a></li>
-
-                          <li><a href="#" class="chinese" data-lang="Chinese">中文</a></li>
-
-						</ul>
-
-
-
-
-<!-- Code provided by Google -->
-
-
-
+				<div class="col-md-2">
+					<div class="footer-widget">
+						<div class="title">CONTACT</div>
+							<a href=""><div class="links">tech@iowiki.com</div></a>
+							<a href=""><div class="links">editor@iowiki.com</div></a>
+	                        <a href=""><div class="links">#internet</div></a>
+							<a href=""><div class="links">#iowiki</div></a>
+					</div>
 				</div>
-
-			</div>
-
-			<div class="col-md-2">
-
-				<div class="footer-widget">
-
-					<div class="title">PAGES</div>
-
-                    <ul>
-
-						  <?php foreach(get_pages_list() as $key => $value): ?>        
-
-                                <li>
-
-                                    <a href="<?=site_url('pages/'.$value['page_slug'].'/'.$value['id'])?>">
-
-                                        <?=$value['page_name']?>
-
-                                    </a>
-
-                                </li>
-
-                            <?php endforeach; ?> 
-
-                    </ul>   
+				<div class="col-md-2">
+					    <!-- BEGIN: Powered by Supercounters.com -->
+					<center><script type="text/javascript" src="http://widget.supercounters.com/flag.js"></script><script type="text/javascript">sc_flag(1213894,"FFFFFF","000000","cccccc",2,10,0,0)</script><br>
+					</center>
+					<!-- END: Powered by Supercounters.com -->
 				</div>
-
-			</div>
-
-			<div class="col-md-2">
-
-				<div class="footer-widget">
-
-					<div class="title">CONTACT</div>
-
-						<a href=""><div class="links">tech@iowiki.com</div></a>
-
-						<a href=""><div class="links">editor@iowiki.com</div></a>
-
-                        <a href=""><div class="links">#internet</div></a>
-
-						<a href=""><div class="links">#iowiki</div></a>
-
-				</div>
-
-			</div>
-			<div class="col-md-2">
-				    <!-- BEGIN: Powered by Supercounters.com -->
-				<center><script type="text/javascript" src="http://widget.supercounters.com/flag.js"></script><script type="text/javascript">sc_flag(1213894,"FFFFFF","000000","cccccc",2,10,0,0)</script><br>
-				</center>
-				<!-- END: Powered by Supercounters.com -->
-			</div>
-		</div> <!-- row -->
-
-		<hr/>
-
-		<div class="copyright-text">Copyright &copy;2015</div>
-
-	</div> <!-- footer -->
-
-</div>	<!-- contaienr -->
-
+			</div> <!-- row -->
+			<hr/>
+			<div class="copyright-text">Copyright &copy;2015</div>
+		</div> <!-- footer -->
+	</div>	<!-- contaienr -->
+</div> <!-- bg-black -->
 
 
 <script type="text/javascript" src="<?=base_url('js/jquery.js')?>"></script>
