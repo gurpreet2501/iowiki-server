@@ -32,7 +32,7 @@
 
 					<?php foreach($results as $key => $data):
 						 if(empty($data["featured_image"]))
-                				$data["featured_image"] = 'sample.png'; 
+                				$data["featured_image"] = 'iowiki-empty.png'; 
 					?>	
 
 						<div class="search-rows">
@@ -49,7 +49,7 @@
 
 									<div class="featured-image">
 
-										<img src="<?=base_url()?>/timthumb.php?src=<?=base_url('assets/uploads/files/'.$data['featured_image'])?>&amp;h=300&amp;w=300" class="img-fit-container img-thumbnail img-circle" />
+										<img src="<?=base_url('assets/uploads/files/'.$data['featured_image'])?>" class="img-fit-container img-thumbnail img-circle" />
 
 									</div>
 

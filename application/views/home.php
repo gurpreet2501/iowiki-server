@@ -11,7 +11,7 @@
                      <?php if(!empty($value['featured_image'])):?>
                         <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url('assets/uploads/files/'.$featured_img)?>" class="img-thumbnail img-fit-container" align="left"/>
                          <?php else: ?>
-                            <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url('assets/uploads/files/iowiki-empty.png')?>" class="img-thumbnail img-fit-container" align="left"/>
+                            <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url('assets/uploads/files/iowiki-empty.png')?>" class="img-circle img-fit-container" align="left"/>
                          <?php endif;?> 
                 </div>
                 <div class="col-md-8">
