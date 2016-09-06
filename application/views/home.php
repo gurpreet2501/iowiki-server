@@ -17,7 +17,7 @@
                 <div class="col-md-8">
                     <div class="post-title">
                         <a href="<?=site_url('post/'.$seo_friendly_post_name)?>">
-                            <?=$value['post_name']?>  
+                            <?=$value['post_name']?>   
                         </a>    
                     </div>  
                     <div class='post-desc'> 
