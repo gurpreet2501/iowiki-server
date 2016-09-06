@@ -186,13 +186,13 @@ span.cat-name {
     padding: 0;
 }
 .footer-widget .title {
-    color: #000;
+    color: #fff;
 }
 .footer-widget a {
-    color: #666;
+    color: #fff;
 }
 .footer-widget a:hover {
-    color: #000;
+    color: #888;
     text-decoration: none;
 }
 .img-home-page-slider {
@@ -207,7 +207,7 @@ span.cat-name {
 }
 .copyright-text {
     text-align: center;
-    color: #333;
+    color: #fff;
     margin-bottom: 10px
 }
 .btn-info {
@@ -413,6 +413,9 @@ span.label.label-default {
 .fb_iframe_widget {
     display: block;
     position: relative;
+}
+.bg-black {
+    background: #000;
 }
 
 @media only screen and (max-width: 768px) {

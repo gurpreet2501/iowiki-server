@@ -73,7 +73,6 @@
                     <div class="col-md-2">
                         <a href="/">
                             <div class="logo">
-                                <!-- <img src="<?=base_url('img/logo.png')?>" alt="iowiki" width="50px" /> -->
                                 <div class='logo-title'>
                                 	IOWIKI 
                                 </div>

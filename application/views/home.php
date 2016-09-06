@@ -1,6 +1,6 @@
 <?php $this->load->view('partials/header'); ?>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-9">
                <?php foreach ($posts as $key => $value):
                     $seo_friendly_post_name = seo_url(htmlentities($value['post_name']));
                     $featured_img = htmlentities($value['featured_image']);
@@ -9,7 +9,9 @@
             <div class="row"> <!-- Single post row -->
                 <div class="col-md-4">
                      <?php if(!empty($value['featured_image'])):?>
-                        <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url()?>/timthumb.php?src=<?=base_url('assets/uploads/files/'.$featured_img)?>&amp;h=150&amp;w=150" class="img-thumbnail img-padd" align="left"/>
+                        <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url('assets/uploads/files/'.$featured_img)?>" class="img-thumbnail img-fit-container" align="left"/>
+                         <?php else: ?>
+                            <img alt="<?=$seo_friendly_post_name?>" src="<?=base_url('assets/uploads/files/iowiki-empty.png')?>" class="img-thumbnail img-fit-container" align="left"/>
                          <?php endif;?> 
                 </div>
                 <div class="col-md-8">
@@ -36,25 +38,16 @@
         <?php $this->load->view('partials/pagination.php'); ?>
      <!-- row -->
         </div> <!-- left block --> <!-- col-md-6 -->
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="row">
                 <div class="middle-block">  
-                    <div class="col-md-6">
                     <?php $this->load->view('partials/sidebar_left');?>
-                    </div>
-                </div>   <!-- middle block -->
-                <div class="right-block">   
-                    <div class="col-md-6">
+                    <br/>
                     <?php $this->load->view('partials/sidebar_right');?>    
                     </div>
-                </div>   <!-- right block -->
+                </div>   <!-- middle block -->
             </div>    
             <hr/>
-            <div class="row">
-                <div class="col-md-12">
-                <?php $this->load->view('partials/tech_events');?>
-                </div>
-            </div>    
         </div>        
     </div>
 <?php $this->load->view('partials/footer');?>

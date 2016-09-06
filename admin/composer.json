@@ -12,7 +12,8 @@
 	},
 	"require": {
 		"php": ">=5.2.4",
-		"illuminate/database": "^5.2"
+		"illuminate/database": "^5.2",
+		"ckeditor/ckeditor": "^4.5"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*",
