@@ -155,7 +155,7 @@ $db['default'] = array(
 	'hostname' => env('hostname','localhost'),
 	'username' => env('username','root'),
 	'password' => env('password',''),
-	'database' => env('database','iowiki-server'),
+	'database' => env('database','iowiki_custom'),
 
 	'dbdriver' => 'mysqli',
 

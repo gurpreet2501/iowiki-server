@@ -72,7 +72,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
-			 <img src="<?=base_url('assets/uploads/files/logo.png')?>" class="img-fit-containter" />
+			 <a href="/"><img src="<?=base_url('assets/uploads/files/logo.png')?>" class="img-fit-containter" /></a>
 		</div>
 		<div class="col-md-8">
 			<nav class="navbar navbar-default">

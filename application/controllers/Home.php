@@ -25,7 +25,7 @@ class Home extends CI_Controller
 		// {
 		//     $this->cache->save('home-page-posts-'.$page_no, $data, 60*60);
 		// }
-
+		
 		$this->load->view('home',array(
 
 			'page' 			=> 'home',
