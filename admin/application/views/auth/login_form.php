@@ -34,7 +34,7 @@ $captcha = array(
 <div id="login-container">
 	<div id="logo" class="text-center" style="margin-top: 44px;margin-bottom: 28px;">
 		<a href="" >
-			<img src="<?= site_url('assets/images/logo-white.png') ?>" alt="Logo" 
+			<img src="<?= site_url('../assets/uploads/files/logo.png') ?>" alt="Logo" 
 			/>
 		</a>
 	</div>

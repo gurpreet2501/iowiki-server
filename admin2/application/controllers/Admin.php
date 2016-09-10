@@ -7,18 +7,14 @@ class Admin extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-   
 
     $this->load->library('grocery_CRUD');
-    auth_force();
-
-     if(user_role() == 'customer')
-       redirect('/auth/logout');
-
-	}
+}
 
  	public function index($lang=false){
-    redirect('admin/reports');
+    echo "<pre>";
+    print_r('$data');
+    exit;
 	}
 
   public function districts(){

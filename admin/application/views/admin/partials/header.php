@@ -1,7 +1,7 @@
 <header id="header">
 	<h1 id="site-logo">
 		<a href="<?= site_url(); ?>">
-			<img src="<?= site_url('/assets/images/logo-white.png') ?>" alt="Site Logo" style="width: 155px; margin-top:-15px"/>
+			<img src="<?= site_url('../assets/uploads/files/logo.png') ?>" alt="Site Logo" style="width: 155px; margin-top:-15px"/>
 		</a>
 	</h1>	
 

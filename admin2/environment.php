@@ -1,7 +1,7 @@
 <?php
 
 return [
-			'database' => 'markfed',
+			'database' => 'iowiki_custom',
 			'hostname' => 'localhost',
 			'username' => 'root',
 			'password' => '',
