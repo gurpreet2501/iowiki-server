@@ -18,6 +18,7 @@ class Home extends CI_Controller
 	}
 	function index($page_no=1)
 	{   
+		
         //creating home page cache
 		// $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		$data = get_home_page_posts($page_no);
@@ -25,7 +26,7 @@ class Home extends CI_Controller
 		// {
 		//     $this->cache->save('home-page-posts-'.$page_no, $data, 60*60);
 		// }
-		
+	
 		$this->load->view('home',array(
 
 			'page' 			=> 'home',

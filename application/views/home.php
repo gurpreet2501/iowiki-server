@@ -1,4 +1,4 @@
-<?php $this->load->view('partials/header'); ?>
+<?php $this->load->view('partials/header');  ?>
     <div class="row">
         <div class="col-md-9">
                <?php foreach ($posts as $key => $value):

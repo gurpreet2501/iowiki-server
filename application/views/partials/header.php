@@ -11,7 +11,7 @@
         'meta_author'  => $this->config->item('meta_author'),
         'meta_doctype'  => $this->config->item('meta_doctype')
     );
-   
+  
  	//Getting post meta info
     if($this->uri->segment(2) && $this->uri->segment(1) == 'post'){ 
 	    $meta = get_post_meta($this->uri->segment(2)); 
@@ -59,9 +59,9 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <?
-    if (strpos($_SERVER['REQUEST_URI'], 'post') == false) {
-            redirect_old_wordpress_urls($_SERVER['REQUEST_URI']);
-    }
+    // if (strpos($_SERVER['REQUEST_URI'], 'post') == false) {
+    //         redirect_old_wordpress_urls($_SERVER['REQUEST_URI']);
+    // }
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  

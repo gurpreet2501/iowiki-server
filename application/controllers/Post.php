@@ -18,10 +18,11 @@ class Post extends CI_Controller
 
 	}
 
-	function index($post_name)
+	function index($post_name=null)
 
 	{   
 
+		
 		$post_slug = seo_url($post_name);
 
 		$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));

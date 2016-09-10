@@ -144,7 +144,7 @@ function get_home_page_posts($page_no){
             )
 
     ));
-  
+ 
   return $data;
 
 
