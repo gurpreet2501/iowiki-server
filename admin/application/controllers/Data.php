@@ -51,7 +51,7 @@ class Data extends MY_Controller
 
    private function create_post_draft_and_edit(){
     //Cleaning empty posts
-    $this->db->delete('dggsjm_posts', array('post_name' => '-GPS-','post_status' => 'Draft'));  
+    $this->db->delete('dggsjm_posts', array('post_name' => '','post_status' => 'Draft'));  
 
     $data = array(
               'post_status' => 'draft',
@@ -179,7 +179,7 @@ class Data extends MY_Controller
         $crud->set_theme('datatables');
         $crud->set_field_upload('file','../assets/uploads/files');
         $crud->callback_before_insert(array($this,'generate_url'));
-        $this->popup_view_crud($crud->render(), 'Media');
+        $this->view_crud($crud->render(), 'Media');
   }
 
   function generate_url($post_array)

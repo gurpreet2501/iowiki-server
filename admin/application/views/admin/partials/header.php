@@ -12,4 +12,5 @@
 	<a href="javascript:;" data-toggle="collapse" data-target=".sidebar-collapse" id="sidebar-toggle" class="navbar-toggle collapsed">
 		<i class="fa fa-reorder"></i>
 	</a>
+	
 </header> <!-- header -->

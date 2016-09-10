@@ -5,6 +5,8 @@
   #RewriteBase /
 
   RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+
+  RewriteCond %{REQUEST_URI} ^admin.*
   
   RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 

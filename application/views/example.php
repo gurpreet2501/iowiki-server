@@ -12,7 +12,7 @@
 
 			</div>
 
-		</div>
+		</div> <!-- row -->
 
 		<hr/>
 
@@ -24,7 +24,7 @@
 
 				  	<li class="list-group-item">
 
-			  			<a href='<?php echo site_url('settings/dggsjm_posts')?>'>Add Posts</a>
+			  			<a href='<?php echo site_url('settings/posts')?>'>Add Posts</a>
 
 				  	</li>
 
@@ -34,11 +34,6 @@
 
 				  	</li>
 
-				  	<li class="list-group-item">
-
-			  			<a href='<?php echo site_url('settings/dggsjm_tags')?>'>Add Tags</a>
-
-				  	</li>
 
 				  	<li class="list-group-item">
 
@@ -48,7 +43,7 @@
 
 				  	<li class="list-group-item">
 
-			  			<a href='<?php echo site_url('settings/dggsjm_add_media')?>'>Add Media</a>
+			  			<a href='<?php echo site_url('settings/add_media')?>'>Add Media</a>
 
 				  	</li>
 
@@ -78,24 +73,10 @@
 
 				<?php echo $output; ?>
 
-			</div>
+			</div> <!-- col-md-10 -->
 
-		</div>
+		</div> <!-- row -->
 
-	</div>
+	</div> <!-- container-fluid -->
 
-
-
-    <div>
-
-
-
-    </div>
-
-</body>
-</html>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-	$(".fancybox").fancybox();
-});
-</script>
+<?php $this->load->view('admin/footer');?>

@@ -61,54 +61,272 @@ class Settings extends CI_Controller {
 		$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 
 	}
+ 
+  // New code 
+
+	 public function posts()
+    {
+      	
+    		$crud = new grocery_CRUD();
+        $crud->where('post_status', 'Published');
+        if($crud->getState() == 'add')
+            $this->create_post_draft_and_edit();
+
+       	$crud->set_table('dggsjm_posts');  
+        $crud->callback_before_update(array($this,'add_post_slug'));
+        $crud->add_fields('meta_title','meta_desc','meta_keywords','meta_author','post_name','post_slug','post_description','add_media','featured_image','post_status','post_tags','created_at');
+        $crud->set_field_upload('featured_image','assets/uploads/files');  
+        $crud->callback_field('add_media', 'Crud_helper::add_media');
+        $crud->field_type('created_at', 'hidden', date('Y-m-d H:i:s'));
+       	$crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
+    		$crud->callback_after_update(array($this, 'generate_sitemap_on_new_post_insert'));
+        $crud->field_type('user_id', 'hidden', 1);
+        $crud->field_type('most_visited', 'hidden');
+        $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
+        $crud->set_relation('category_id','dggsjm_categories','category_name');
+        $crud->callback_field('post_tags', 'Crud_helper::add_tags');
+        $crud->display_as('category_id','Category');
+  			$output = $crud->render();
+	    	$this->_example_output($output);
+
+    }
+
+      function add_post_slug($post_array)
+      {
+        
+        $slug = $this->to_prety_url($post_array['post_name']);
+
+        $post_array['post_slug'] = $slug;
+
+        return $post_array;
+
+      }
+    // # $pkey is the post id
+    public function add_post_tags($pkey)
+    {    
+        $crud = new grocery_crud();
+        $crud->set_table('dggsjm_tags');        	
+        $crud->field_type('post_id','hidden', $pkey);
+        $crud->unique_fields('tag_name');
+        $crud->field_type('tag_slug','hidden');
+        $crud->required_fields('tag_name');
+        $crud->where('post_id',$pkey);
+        $crud->callback_before_delete(array($this,'delete_everywhere'));
+        $crud->callback_after_insert(array($this, 'add_tag_value_in_m_to_n_relation'));
+        $crud->callback_before_insert(array($this, 'add_tag_slug'));
+        $crud->callback_before_update(array($this,'add_tag_slug'));
+        $crud->set_theme('datatables');
+        $output = $crud->render();
+		    $this->_example_output($output);
+    }
+
+      public function delete_everywhere($primary_key)
+      { 
+        $row = $this->db->get_where('dggsjm_tags', array('id' => $primary_key))->row();
+      
+        return $this->db->delete('dggsjm_post_dggsjm_tags', array('tag_id' => $primary_key, 'post_id' => $row->post_id));  
+      }
+     
+
+    function add_tag_value_in_m_to_n_relation($post_array, $primary_key)
+    {
+      
+      $data = array(
+              'post_id' => $post_array['post_id'],
+              'tag_id' => $primary_key,
+      );
+
+      $this->db->insert('dggsjm_post_dggsjm_tags', $data); 
+
+      $slug = $this->to_prety_url($post_array['tag_name']);
+
+      $post_array['tag_slug'] = $slug;
+
+      return $post_array;
+
+    }
+
+    function add_tag_slug($post_array)
+    {
+      
+      $slug = $this->to_prety_url($post_array['tag_name']);
+
+      $post_array['tag_slug'] = $slug;
+
+      return $post_array;
+
+    }
+
+    function to_prety_url($str){
+      if($str !== mb_convert_encoding( mb_convert_encoding($str, 'UTF-32', 'UTF-8'), 'UTF-8', 'UTF-32') )
+        $str = mb_convert_encoding($str, 'UTF-8', mb_detect_encoding($str));
+      $str = htmlentities($str, ENT_NOQUOTES, 'UTF-8');
+      $str = preg_replace('`&([a-z]{1,2})(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', '\1', $str);
+      $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
+      $str = preg_replace(array('`[^a-z0-9]`i','`[-]+`'), '-', $str);
+      $str = strtolower( trim($str, '-') );
+      return $str;
+    }
 
 
+    public function dggsjm_categories()
 
-	public function dggsjm_posts()
+    {
 
-	{
+            $crud = $this->crud_init('dggsjm_categories',['category_name']);
 
-		$crud = new grocery_CRUD();
+            $crud->set_theme('datatables');
 
-		$crud->set_theme('datatables');
+            $crud->unique_fields('category_name');
 
-		$crud->set_table('dggsjm_posts');
+            $crud->field_type('category_slug', 'hidden');
+            
+            $crud->callback_before_insert(array($this, 'generate_category_slug'));
 
-		$crud->order_by('created_at','desc');
+            $crud->callback_before_update(array($this, 'generate_category_slug'));
 
-		$crud->required_fields('post_name','post_description');
+            $crud->required_fields('category_name');
 
-		$crud->unique_fields('post_name');
+            $crud->set_subject('Categories');
 
-		$crud->field_type('post_slug', 'hidden');
+            $this->view_crud($crud->render(), 'Categories');
 
-		$crud->fields('meta_title','meta_desc','post_slug','meta_keywords','meta_author','add_media','post_name','post_description','featured_image','post_status','post_categories','post_tags','created_at');
+    }
+    
+  public function dggsjm_comments()
 
-		$crud->callback_field('add_media','Crud_helper::add_media');
+  {
 
-		$crud->columns('post_name','featured_image','post_slug');
+      $crud = $this->crud_init('dggsjm_comments',['name','user_email','comments','post_slug']);
 
-		$crud->set_relation_n_n('post_categories','dggsjm_post_dggsjm_categories','dggsjm_categories','post_id','category_id','category_name');
+      $crud->set_theme('datatables');
+      $crud->unset_add();
+      $crud->unset_edit();
 
-		$crud->set_relation_n_n('post_tags','dggsjm_post_dggsjm_tags','dggsjm_tags','post_id','tag_id','tag_name');
+      $crud->set_subject('Comments');
 
-		$crud->field_type('user_id', 'hidden', $this->tank_auth->get_user_id());
+      $this->view_crud($crud->render(), 'Comments');
 
-		$crud->callback_before_insert(array($this, 'generate_post_slug'));
+  }
 
-		$crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
+  public function add_media($pkey=null)
+    {   
+    		$crud = new grocery_CRUD();
+    	 	$crud->set_table('dggsjm_add_media');
+        $crud->add_fields('file','media_url','post_id');
+        $crud->field_type('post_id','hidden', $pkey);
+        $crud->field_type('media_url','hidden');
+        $crud->where('post_id', $pkey);
+        $crud->set_theme('datatables');
+        $crud->set_field_upload('file','assets/uploads/files');
+        $crud->callback_before_insert(array($this,'generate_url'));
+        $output = $crud->render();
+		    $this->_example_output($output);
+  }
 
-		$crud->callback_after_update(array($this, 'generate_sitemap_on_new_post_insert'));
+  function generate_url($post_array)
+  {
+    
+    $post_array['media_url'] = base_url('../assets/uploads/files/'.$post_array['file']); 
+    return $post_array;
+  }
 
-    	$crud->callback_before_update(array($this, 'generate_post_slug'));
 
-		$crud->set_subject('Posts');
+// New code ends
 
-		$output = $crud->render();
 
-		$this->_example_output($output);
+	// public function dggsjm_posts()
 
-	}
+	// {
+
+	// 	$crud = new grocery_CRUD();
+
+
+	// 	$crud->set_theme('datatables');
+
+	// 	$crud->set_table('dggsjm_posts');
+
+	// 	$crud->order_by('created_at','desc');
+
+	// 	$crud->required_fields('post_name','post_description');
+
+	// 	$crud->unique_fields('post_name');
+
+	// 	$crud->field_type('post_slug', 'hidden');
+
+	// 	$crud->fields('meta_title','meta_desc','post_slug','meta_keywords','meta_author','add_media','post_name','post_description','featured_image','post_status','post_categories','post_tags','created_at');
+
+	// 	$crud->callback_field('add_media','Crud_helper::add_media');
+
+	// 	$crud->columns('post_name','featured_image','post_slug');
+
+	// 	$crud->set_relation_n_n('post_categories','dggsjm_post_dggsjm_categories','dggsjm_categories','post_id','category_id','category_name');
+
+	// 	$crud->set_relation_n_n('post_tags','dggsjm_post_dggsjm_tags','dggsjm_tags','post_id','tag_id','tag_name');
+
+	// 	$crud->field_type('user_id', 'hidden', $this->tank_auth->get_user_id());
+
+	// 	$crud->callback_before_insert(array($this, 'generate_post_slug'));
+
+		// $crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
+
+		// $crud->callback_after_update(array($this, 'generate_sitemap_on_new_post_insert'));
+
+ //    	$crud->callback_before_update(array($this, 'generate_post_slug'));
+
+	// 	$crud->set_subject('Posts');
+
+	// 	$output = $crud->render();
+
+	// 	$this->_example_output($output);
+
+	// }
+
+	
+	// public function dggsjm_posts()
+
+	// {
+
+	// 	$crud = new grocery_CRUD();
+
+	// 	$crud->set_theme('flexigrid');
+ //        $crud->where('post_status', 'Published');
+ //        if($crud->getState() == 'add')
+ //            $this->create_post_draft_and_edit();
+
+ //        $crud->callback_before_update(array($this,'add_post_slug'));
+ //        $crud->add_fields('meta_title','meta_desc','meta_keywords','meta_author','post_name','post_slug','post_description','add_media','featured_image','post_status','post_tags','created_at');
+ //        $crud->set_field_upload('featured_image','/assets/uploads/files');  
+ //        $crud->callback_field('add_media', 'Crud_helper::add_media');
+ //        $crud->field_type('created_at', 'hidden', date('Y-m-d H:i:s'));
+ //        $crud->field_type('user_id', 'hidden', 1);
+ //        $crud->field_type('most_visited', 'hidden');
+ //        $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
+ //        $crud->set_relation('category_id','dggsjm_categories','category_name');
+ //        $crud->callback_field('post_tags', 'Crud_helper::add_tags');
+ //        $crud->display_as('category_id','Category');
+
+	// 	$output = $crud->render();
+
+	// 	$this->_example_output($output);
+
+	// }
+
+  private function create_post_draft_and_edit(){
+    //Cleaning empty posts
+    $this->db->delete('dggsjm_posts', array('post_name' => '-GPS-','post_status' => 'Draft'));  
+
+    $data = array(
+              'post_status' => 'draft',
+              'post_name' => '-GPS-',
+    );
+
+    $this->db->insert('dggsjm_posts', $data);
+    $insert_id = $this->db->insert_id();
+    redirect("settings/dggsjm_posts/edit/".$insert_id);
+  }
+
+
 
 
 	function generate_sitemap_on_new_post_insert($post_array,$primary_key)
@@ -128,56 +346,6 @@ class Settings extends CI_Controller {
 	}
 
 
-
-    public function dggsjm_categories()
-
-    {
-
-            $crud = new grocery_CRUD();
-
-            $crud->set_theme('datatables');
-
-            $crud->set_table('dggsjm_categories');
-
-            $crud->unique_fields('category_name');
-
-            $crud->field_type('category_slug', 'hidden');
-            
-            $crud->callback_before_insert(array($this, 'generate_category_slug'));
-
-            $crud->callback_before_update(array($this, 'generate_category_slug'));
-
-            $crud->required_fields('category_name');
-
-            $crud->set_subject('Categories');
-
-            $output = $crud->render();
-
-            $this->_example_output($output);
-
-    }
-
-    public function dggsjm_comments()
-
-	{
-
-			$crud = new grocery_CRUD();
-
-			$crud->set_theme('datatables');
-
-			$crud->set_table('dggsjm_comments');
-            $crud->unset_add();
-            $crud->unset_edit();
-            $crud->columns('name','user_email','comments','post_slug');
-            $crud->fields('name','user_email','comments','post_slug');
-			
-			$crud->set_subject('Comments');
-
-			$output = $crud->render();
-
-			$this->_example_output($output);
-
-	}
 
 	function generate_category_slug($post_array,$primary_key)
 	{	
@@ -266,39 +434,6 @@ class Settings extends CI_Controller {
 	}
 
 
-
-	public function dggsjm_add_media()
-
-	{
-
-		$crud = new grocery_CRUD();
-
-
-		if($crud->getState()=='add')
-
-			$crud->field_type('media_url', 'hidden');
-
-
-		$crud->callback_before_insert(array($this,'read_file_name'));
-
-		$crud->set_theme('datatables');
-
-		$crud->set_table('dggsjm_add_media');
-
-		$crud->order_by('id','desc');
-
-		$crud->set_subject('File');
-
-		$crud->callback_before_delete(array($this,'delete_thumb'));
-
-		$crud->set_field_upload('file',"assets/uploads/files");
-
-		$output = $crud->render();
-
-		$this->_example_output($output);
-
-	}
-
 	function read_file_name($post_array)
 	{
 		$post_array['media_url'] = base_url('assets/uploads/files/'.$post_array['file']);	
@@ -366,6 +501,57 @@ class Settings extends CI_Controller {
 	    return $post_array;
 	}
 
-	
+	public function crud_init($table, $col = Null)
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table($table)->unset_print()->unset_export()->unset_texteditor(true);
+
+        if ($col !== null){
+            $crud->columns($col);
+        }
+
+        return $crud;
+    }
+
+       /* Load curd view
+    */
+    function view_crud($output, $heading = '', $base = 'example')
+    {
+        if  (!property_exists($output, 'css_files')){
+            $output->css_files = [];
+        }
+        if  (!property_exists($output, 'js_files')){
+            $output->js_files = [];
+        }
+        if  (!property_exists($output, 'output')){
+            $output->output = '';
+        }
+         
+        $output->heading = $heading;
+        
+         if(empty($output->template))
+            $output->template = 'crud';
+        $this->load->view($base, $output);
+    }
+
+
+		    function popup_view_crud($output, $heading = '', $base = 'popup_base')
+    {
+        if  (!property_exists($output, 'css_files')){
+            $output->css_files = [];
+        }
+        if  (!property_exists($output, 'js_files')){
+            $output->js_files = [];
+        }
+        if  (!property_exists($output, 'output')){
+            $output->output = '';
+        }
+         
+        $output->heading = $heading;
+        
+         if(empty($output->template))
+            $output->template = 'crud';
+        $this->load->view($base, $output);
+    }
 
 }
