@@ -27,7 +27,7 @@ class Search extends CI_Controller
 	{   
 		
 
-        $data = array();
+    $data = array();
 
 		if(!$_GET['search_keyword']){
 
@@ -36,9 +36,7 @@ class Search extends CI_Controller
 			redirect('/');
 
 		}
-
 		
-
 		$data = lako::get('objects')->get('dggsjm_posts')->read(array(
 
 			'select' 	=>  array('^*'),

@@ -20,21 +20,23 @@ class Category extends CI_Controller
 
 
 
-	function index($cat){
+	function index($cat_id){
 
+		if(!$cat_id)
+			redirect('404');
+
+ 		 $data = get_category_name($cat_id);
+
+		 $posts = category_posts($cat_id);
 		
-
-		 $data = category_posts($cat);
-
-      
 
 		 $this->load->view('post/category',array(
 
-		 	'results' 		=> $data['dggsjm_posts'],
+		 	'results' 		=> $posts,
 
 		 	'category_name'	=> $data['category_name'],
 
-		 	'total_results' => count($data['dggsjm_posts']),
+		 	'total_results' => count($posts),
 
 		 	'page'			=> 'search'
 

@@ -185,29 +185,42 @@ function get_post_categories(){
 
 /* fetch category posts by id */
 
-function category_posts($cat){
+function category_posts($cat_id){
 
-  
+  $select = array('post_name','id','featured_image');
 
-  $select = array('^*','dggsjm_posts.post_name','dggsjm_posts.id','dggsjm_posts.featured_image');
-
-
-
-  $cat_posts = lako::get('objects')->get('dggsjm_categories')->read(array(
+  $cat_posts = lako::get('objects')->get('dggsjm_posts')->read(array(
 
         'select'  => $select,
 
-        'where'   => array('category_slug' , $cat),
+        'where'   => array('category_id' , $cat_id),
+
+        'pagination' => array(
+
+              'per_page' => 3,
+
+              'page' => isset($_GET['page_no']) ? $_GET['page_no'] : 1,
+
+            )
 
         ));
 
 
-
-  return $cat_posts[0] ? $cat_posts[0] : redirect(404);
+  return $cat_posts['results'] ? $cat_posts['results'] : [];
 
 }
 
+function get_category_name($id){
 
+    $data = lako::get('objects')->get('dggsjm_categories')->read(array(
+
+        'select'  => ['category_name','category_slug'],
+
+        'where'   => array('id' , $id),
+       )); 
+
+    return $data[0];
+}
 
 function get_posts_by_tag($slug){
   

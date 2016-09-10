@@ -104,7 +104,7 @@
 			              <ul class="dropdown-menu">
 			                <?php foreach ($categories as $key => $value): ?>
 			                     <li>
-			                        <a href="<?=site_url('category/'.seo_url($value['category_slug']))?>">
+			                        <a href="<?=site_url('category/'.$value['id'])?>">
 			                            <?=$value['category_name']?>
 			                        </a>
 			                    </li>

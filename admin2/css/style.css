@@ -1,0 +1,217 @@
+h1,h2,h3,h4{
+ font-family: 'Chewy', cursive;
+}
+
+.list-group-item > a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+.kill_pad_mar{
+ margin: 0px !important; padding: 0px !important;
+}
+.grey_back{
+ background: #4d4d4d;
+} 
+.dark_grey_back{
+ background: #202020;
+}
+.navbar-header{
+ width:100%;
+}
+.content_box {
+  background: none repeat scroll 0 0 #f3f3f3;
+  padding: 25px;
+}
+.navbar-cls-top .navbar-brand {
+  font-size: 25px;
+}
+.fa-3x{
+ font-size:2em;
+}
+.img-fit-container{
+ width: 100%;
+}
+.fa-trash-o {
+  font-size: 24px;
+}
+.header_bg {
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("../img/header_bg.jpg");
+  background-origin: padding-box;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 247px;
+}
+ .container{
+  width: 825px;
+	min-height:350px
+}
+.top_container {
+  margin: auto;
+  width: 825px;
+}
+a{
+ color: #000;
+ text-decoration: none;
+}
+a:hover{
+ color: #000;
+ text-decoration: none;
+}
+.logo {
+  margin-top: 2px;
+}
+.back_light_color_top_nav {
+  margin-bottom: 11px;
+}
+.back_light_color_top_nav{
+ font-weight: bold;
+}
+.btn.btn-default.dropdown-toggle {
+  margin-top: 18px;
+}
+.drop1 {
+  margin-right: 27px;
+  width: 152px;
+}
+.img-pad {
+  margin-bottom: 7px;
+  margin-right: 14px;
+}
+.footer.text-center {
+  background: none repeat scroll 0 0 #385a0e;
+  height: 80px;
+  margin-top: 30px;
+}
+.copyright {
+  color: #fff;
+  padding-top: 26px;
+}
+.align-right{
+ text-align: right;
+}
+.activity_button {
+  margin-top: 15px;
+}
+.act_description{
+ font-style: italic;
+}
+.collapse.navbar-collapse{
+ padding: 0px 
+}
+.nav.navbar-nav a {
+  color: #000 !important;
+  font-family: 'Fjalla One',sans-serif;
+  font-size: 18px;
+  padding-left: 17px;
+}
+table.cart_table td{
+ padding: 12px;
+ text-align:center;
+}
+.forgot_pass {
+  position: absolute;
+  right: 0;
+}
+.form-errors p {
+  background: none repeat scroll 0 0 #f2dede;
+  border-radius: 4px;
+  color: #a94442;
+  padding: 9px;
+}
+.underline{
+ text-decoration: underline;
+}
+h1{
+ margin-top:0px;
+}
+
+.login_error {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+	border-radius: 4px;
+  color: #a94442;
+  display: block;
+  padding: 6px;
+	
+}
+.form-group p {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+	border-radius: 4px; 
+  color: #a94442;
+  display: block;
+  padding: 6px;
+	
+}
+
+.red {
+  border: 1px Solid RED;
+} 
+.cancel_button { 
+  float: left;
+  margin-right: 13px; 
+}
+.submit_btn {
+  float: left;
+}
+
+.form_btns.clearfix.text-center {
+  margin: auto;
+  width: 23%;
+}
+.exp_year {
+  float: left;
+  width: 40%;
+}
+.exp_month {
+  float: left;
+  margin-right: 14px;
+  width: 40%;
+}
+
+.alert.alert-success {
+  margin-top: 10px;
+}
+.alert.alert-danger {
+  margin-top: 10px;
+}
+.total_price {
+  border-radius: 4px;
+  color: RED;
+  font-weight: bold;
+  padding: 5px;
+}
+.activity a {
+  text-decoration: underline;
+}
+.empty_cart_msg {
+  margin-top: 40px;
+  text-align: center;
+}
+.orders_table {
+  margin-left: 30px !important;
+}
+.parent_login #quickSearchBox{
+ display: none;
+}
+.terms-cond{
+ text-decoration: underline;
+}
+.error-404 {
+  font-size: 50px;
+  margin-top: 50px;
+  text-align: center;
+}
+.logo_dimensions{
+ width:55%;
+}
+
+.names { 
+  text-transform: capitalize;
+}
+
