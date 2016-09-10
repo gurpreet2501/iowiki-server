@@ -28,15 +28,19 @@ class Category extends CI_Controller
  		 $data = get_category_name($cat_id);
 
 		 $posts = category_posts($cat_id);
-		
+			
 
 		 $this->load->view('post/category',array(
 
-		 	'results' 		=> $posts,
+		 	'results' 		=> $posts['results'],
 
 		 	'category_name'	=> $data['category_name'],
+		 	
+		 	'cat_id'	=> $cat_id,
 
-		 	'total_results' => count($posts),
+		 	'pagination'   => $posts['pagination'],
+
+		 	'total_results' => count($posts['results']),
 
 		 	'page'			=> 'search'
 

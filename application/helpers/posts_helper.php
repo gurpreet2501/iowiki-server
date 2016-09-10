@@ -182,11 +182,11 @@ function get_post_categories(){
 }
 
 
-
 /* fetch category posts by id */
 
 function category_posts($cat_id){
 
+  
   $select = array('post_name','id','featured_image');
 
   $cat_posts = lako::get('objects')->get('dggsjm_posts')->read(array(
@@ -197,7 +197,7 @@ function category_posts($cat_id){
 
         'pagination' => array(
 
-              'per_page' => 3,
+              'per_page' => 10,
 
               'page' => isset($_GET['page_no']) ? $_GET['page_no'] : 1,
 
@@ -206,7 +206,7 @@ function category_posts($cat_id){
         ));
 
 
-  return $cat_posts['results'] ? $cat_posts['results'] : [];
+  return $cat_posts ? $cat_posts : [];
 
 }
 

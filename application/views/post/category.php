@@ -36,7 +36,7 @@
 
 				    if(!$featured_image)
 
-				    	$featured_image = 'demo.png';
+				    	$featured_image = 'iowiki-empty.png';
 
 				?>	
 
@@ -81,7 +81,40 @@
 		 		<?php endforeach;?>
 
 			</div>
+				<div class="pagination clearfix">
 
+		         		<div class="previous-btn">
+
+		         			<?php
+
+		         			if($pagination['previous']):?>
+
+		         				<a href="<?=site_url('category/'.$cat_id.'/?page_no='.$pagination['previous'])?>">
+
+		         					<button class="btn btn-warning" type="button">Previous</button>
+
+		         				</a>
+
+		         			<?php endif;?>	
+
+		         		</div>
+		         		<div class="next-btn">
+
+		         			<?php 
+
+		         			if($pagination['next']):?>
+
+		         				<a href="<?=site_url('category/'.$cat_id.'/?page_no='.$pagination['next'])?>">
+
+		         					<button class="btn btn-warning" type="button">NEXT</button>
+
+		         				</a>
+
+		         			<?php endif;?>
+
+		         		</div>
+
+		         	</div>
 
 
 		</div> <!-- col-md-9 -->
