@@ -68,7 +68,7 @@ class Settings extends CI_Controller {
     {
       	
     		$crud = new grocery_CRUD();
-        $crud->where('post_status', 'Published');
+        // $crud->where('post_status', 'Published');
         if($crud->getState() == 'add')
             $this->create_post_draft_and_edit();
 
@@ -79,7 +79,6 @@ class Settings extends CI_Controller {
         $crud->callback_field('add_media', 'Crud_helper::add_media');
         $crud->field_type('created_at', 'hidden', date('Y-m-d H:i:s'));
        	$crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
-    		$crud->callback_after_update(array($this, 'generate_sitemap_on_new_post_insert'));
         $crud->field_type('user_id', 'hidden', 1);
         $crud->field_type('most_visited', 'hidden');
         $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
