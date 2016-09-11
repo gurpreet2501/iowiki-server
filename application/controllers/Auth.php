@@ -134,7 +134,7 @@ class Auth extends CI_Controller
 
 						$data['login_by_email'])) {								// success
 
-					redirect('/settings/dggsjm_posts');
+					redirect('/settings/posts');
 
 
 

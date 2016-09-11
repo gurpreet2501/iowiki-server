@@ -73,6 +73,7 @@ class Settings extends CI_Controller {
             $this->create_post_draft_and_edit();
 
        	$crud->set_table('dggsjm_posts');  
+        $crud->field_type('meta_author','hidden','Simranjot Kaur');
         $crud->callback_before_update(array($this,'add_post_slug'));
         $crud->add_fields('meta_title','meta_desc','meta_keywords','meta_author','post_name','post_slug','post_description','add_media','featured_image','post_status','post_tags','created_at');
         $crud->set_field_upload('featured_image','assets/uploads/files');  
@@ -81,7 +82,7 @@ class Settings extends CI_Controller {
        	$crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
         $crud->field_type('user_id', 'hidden', 1);
         $crud->field_type('most_visited', 'hidden');
-        $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
+        $crud->columns('post_name','post_description','post_status','featured_image');
         $crud->set_relation('category_id','dggsjm_categories','category_name');
         $crud->callback_field('post_tags', 'Crud_helper::add_tags');
         $crud->display_as('category_id','Category');

@@ -155,9 +155,5 @@ if($detect->isMobile()): ?>
 </script>
 	
 <?php endif; ?>
-  
-
-
-?>
 </body>
 </html>
