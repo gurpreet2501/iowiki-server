@@ -1,11 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
-
 class Settings extends CI_Controller {
-
-
-
 	public function __construct()
 
 	{
@@ -117,7 +112,7 @@ class Settings extends CI_Controller {
         $crud->callback_before_update(array($this,'add_tag_slug'));
         $crud->set_theme('datatables');
         $output = $crud->render();
-		    $this->_example_output($output);
+        $this->load->view('crud-popup.php',$output);
     }
 
       public function delete_everywhere($primary_key)
@@ -221,7 +216,7 @@ class Settings extends CI_Controller {
         $crud->set_field_upload('file','assets/uploads/files');
         $crud->callback_before_insert(array($this,'generate_url'));
         $output = $crud->render();
-		    $this->_example_output($output);
+		    $this->load->view('crud-popup.php',$output);
   }
 
   function generate_url($post_array)
@@ -235,95 +230,19 @@ class Settings extends CI_Controller {
 // New code ends
 
 
-	// public function dggsjm_posts()
-
-	// {
-
-	// 	$crud = new grocery_CRUD();
-
-
-	// 	$crud->set_theme('datatables');
-
-	// 	$crud->set_table('dggsjm_posts');
-
-	// 	$crud->order_by('created_at','desc');
-
-	// 	$crud->required_fields('post_name','post_description');
-
-	// 	$crud->unique_fields('post_name');
-
-	// 	$crud->field_type('post_slug', 'hidden');
-
-	// 	$crud->fields('meta_title','meta_desc','post_slug','meta_keywords','meta_author','add_media','post_name','post_description','featured_image','post_status','post_categories','post_tags','created_at');
-
-	// 	$crud->callback_field('add_media','Crud_helper::add_media');
-
-	// 	$crud->columns('post_name','featured_image','post_slug');
-
-	// 	$crud->set_relation_n_n('post_categories','dggsjm_post_dggsjm_categories','dggsjm_categories','post_id','category_id','category_name');
-
-	// 	$crud->set_relation_n_n('post_tags','dggsjm_post_dggsjm_tags','dggsjm_tags','post_id','tag_id','tag_name');
-
-	// 	$crud->field_type('user_id', 'hidden', $this->tank_auth->get_user_id());
-
-	// 	$crud->callback_before_insert(array($this, 'generate_post_slug'));
-
-		// $crud->callback_after_insert(array($this, 'generate_sitemap_on_new_post_insert'));
-
-		// $crud->callback_after_update(array($this, 'generate_sitemap_on_new_post_insert'));
-
- //    	$crud->callback_before_update(array($this, 'generate_post_slug'));
-
-	// 	$crud->set_subject('Posts');
-
-	// 	$output = $crud->render();
-
-	// 	$this->_example_output($output);
-
-	// }
-
 	
-	// public function dggsjm_posts()
-
-	// {
-
-	// 	$crud = new grocery_CRUD();
-
-	// 	$crud->set_theme('flexigrid');
- //        $crud->where('post_status', 'Published');
- //        if($crud->getState() == 'add')
- //            $this->create_post_draft_and_edit();
-
- //        $crud->callback_before_update(array($this,'add_post_slug'));
- //        $crud->add_fields('meta_title','meta_desc','meta_keywords','meta_author','post_name','post_slug','post_description','add_media','featured_image','post_status','post_tags','created_at');
- //        $crud->set_field_upload('featured_image','/assets/uploads/files');  
- //        $crud->callback_field('add_media', 'Crud_helper::add_media');
- //        $crud->field_type('created_at', 'hidden', date('Y-m-d H:i:s'));
- //        $crud->field_type('user_id', 'hidden', 1);
- //        $crud->field_type('most_visited', 'hidden');
- //        $crud->columns('post_name','post_slug','post_description','post_status','featured_image');
- //        $crud->set_relation('category_id','dggsjm_categories','category_name');
- //        $crud->callback_field('post_tags', 'Crud_helper::add_tags');
- //        $crud->display_as('category_id','Category');
-
-	// 	$output = $crud->render();
-
-	// 	$this->_example_output($output);
-
-	// }
-
   private function create_post_draft_and_edit(){
     //Cleaning empty posts
-    $this->db->delete('dggsjm_posts', array('post_name' => '-GPS-','post_status' => 'Draft'));  
+    $this->db->delete('dggsjm_posts', array('post_name' => '-DGGSJM-','post_status' => 'Draft'));  
 
     $data = array(
               'post_status' => 'draft',
-              'post_name' => '-GPS-',
+              'post_name' => '-DGGSJM-',
     );
 
     $this->db->insert('dggsjm_posts', $data);
     $insert_id = $this->db->insert_id();
-    redirect("settings/dggsjm_posts/edit/".$insert_id);
+    redirect("settings/posts/edit/".$insert_id);
   }
 
 
@@ -337,7 +256,7 @@ class Settings extends CI_Controller {
 	    return true;
 	}
 
-	function generate_post_slug($post_array,$primary_key)
+	function generate_post_slug($post_array, $primary_key)
 	{	
 
 		$post_array['post_slug'] = seo_url($post_array['post_name']);
@@ -369,7 +288,7 @@ class Settings extends CI_Controller {
 
 		$crud->required_fields('date');
 
-        $crud->order_by('start_date','desc');
+    $crud->order_by('start_date','desc');
 
 		$crud->required_fields('location');
 
@@ -451,14 +370,7 @@ class Settings extends CI_Controller {
 
 	    unlink($file_path);
 
-	 
-
 	   return true;
-
-	  	
-
-
-
 	}
 
 
@@ -479,7 +391,7 @@ class Settings extends CI_Controller {
 
 			$crud->callback_before_insert(array($this, 'generate_tags_slug'));
 
-    		$crud->callback_before_update(array($this, 'generate_tags_slug'));
+    	$crud->callback_before_update(array($this, 'generate_tags_slug'));
 
 			$crud->required_fields('tag_name');
 
@@ -534,24 +446,5 @@ class Settings extends CI_Controller {
         $this->load->view($base, $output);
     }
 
-
-		    function popup_view_crud($output, $heading = '', $base = 'popup_base')
-    {
-        if  (!property_exists($output, 'css_files')){
-            $output->css_files = [];
-        }
-        if  (!property_exists($output, 'js_files')){
-            $output->js_files = [];
-        }
-        if  (!property_exists($output, 'output')){
-            $output->output = '';
-        }
-         
-        $output->heading = $heading;
-        
-         if(empty($output->template))
-            $output->template = 'crud';
-        $this->load->view($base, $output);
-    }
 
 }

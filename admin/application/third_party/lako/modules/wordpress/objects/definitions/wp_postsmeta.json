@@ -1,6 +1,0 @@
-{
-  "table" : "postmeta",
-  "name"  : "wp_postmeta",
-  "pkey"  : "meta_id",
-  "fields": {}
-}
